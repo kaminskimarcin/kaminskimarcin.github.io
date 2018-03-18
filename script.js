@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  const apiRoot = 'https://cryptic-stream-93817.herokuapp.com/v1/';
-  const trelloApiRoot = 'https://cryptic-stream-93817.herokuapp.com/v1/trello/';
+  const apiRoot = 'https://shrouded-brook-81622.herokuapp.com/v1/';
+  const trelloApiRoot = 'https://shrouded-brook-81622.herokuapp.com/v1/trello/';
   const datatableRowTemplate = $('[data-datatable-row-template]').children()[0];
   const $tasksContainer = $('[data-tasks-container]');
 
