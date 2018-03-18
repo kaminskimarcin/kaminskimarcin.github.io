@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  const apiRoot = 'https://shrouded-brook-81622.herokuapp.com/v1/';
-  const trelloApiRoot = 'https://shrouded-brook-81622.herokuapp.com/v1/trello/';
+  const apiRoot = 'https://cryptic-stream-93817.herokuapp.com/v1/';
+  const trelloApiRoot = 'https://cryptic-stream-93817.herokuapp.com/v1/trello/';
   const datatableRowTemplate = $('[data-datatable-row-template]').children()[0];
   const $tasksContainer = $('[data-tasks-container]');
 
@@ -101,6 +101,11 @@ $(document).ready(function() {
         parentEl.attr('data-task-id', data.id).toggleClass('datatable__row--editing');
         parentEl.find('[data-task-name-paragraph]').text(taskTitle);
         parentEl.find('[data-task-content-paragraph]').text(taskContent);
+      },
+      complete: function(data) {
+        if(data.status === 200) {
+          getAllTasks();
+        }
       }
     });
   }
@@ -111,8 +116,7 @@ $(document).ready(function() {
     var requestUrl = apiRoot + 'tasks';
 
     $.ajax({
-      url: requestUrl + '/' + taskId
-      ,
+      url: requestUrl + '/' + taskId,
       method: 'DELETE',
       success: function() {
         parentEl.slideUp(400, function() { parentEl.remove(); });
@@ -138,7 +142,11 @@ $(document).ready(function() {
         title: taskTitle,
         content: taskContent
       }),
-      success: getAllTasks
+      complete: function(data) {
+        if(data.status === 200) {
+          getAllTasks();
+        }
+      }
     });
   }
 
@@ -185,10 +193,10 @@ $(document).ready(function() {
         description: relatedTask.content,
         listId: selectedListId
       }),
-      success: function(data) {
+		success: function(data) {
         console.log('Card created - ' + data.shortUrl);
         alert('Card created - ' + data.shortUrl);
-      }
+      }	
     });
   }
 
